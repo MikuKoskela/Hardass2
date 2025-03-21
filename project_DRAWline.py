@@ -19,12 +19,14 @@ oled = SSD1306_I2C(WIDTH, HEIGHT, i2c)                  # Init oled display
 x=0
 y=32
 
+
 while True:
     oled.text(".",x,y)
-    utime.sleep(0.025) #sleep 200ms
+    utime.sleep(0.025) #sleep 25ms
     oled.show()
     x+=1
-    if button_sw0() == 0: #if sw0 pressed move down
+    if button_sw0() == 0 and y <56 : #if sw0 pressed move down
+        
         y+=1
     
     if button_sw1() == 0: #if sw1 pressed start over
@@ -32,9 +34,8 @@ while True:
         x=0
         y=32
         
-    if button_sw2() == 0: #if sw2 pressed move up
+    if button_sw2() == 0 and y > -4: #if sw2 pressed move up
         y-=1
         
-    
     if x==124: # when close to end start from left
         x=0
